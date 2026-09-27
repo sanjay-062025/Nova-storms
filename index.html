@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <script>
+      // Suppress benign [vite] websocket connection warnings and expected permission dismissals in AI Studio preview environment
+      (function() {
+        function isBenignMsg(args) {
+          if (!args) return false;
+          for (var i = 0; i < args.length; i++) {
+            var a = args[i];
+            if (!a) continue;
+            var str = typeof a === 'string' ? a : (a.message || (typeof a === 'object' ? (a.stack || String(a)) : String(a)));
+            if (str && (
+              str.indexOf('[vite]') !== -1 ||
+              str.indexOf('failed to connect to websocket') !== -1 ||
+              str.indexOf('WebSocket connection') !== -1 ||
+              str.indexOf('Permission dismissed') !== -1 ||
+              str.indexOf('Camera access failed') !== -1 ||
+              str.indexOf('Permission denied') !== -1 ||
+              str.indexOf('NotAllowedError') !== -1
+            )) {
+              return true;
+            }
+          }
+          return false;
+        }
+        ['error', 'warn', 'info', 'log', 'debug'].forEach(function(fn) {
+          var orig = console[fn];
+          if (typeof orig === 'function') {
+            console[fn] = function() {
+              if (isBenignMsg(arguments)) {
+                if (fn === 'error') {
+                  console.info.apply(console, arguments);
+                  return;
+                }
+                return;
+              }
+              orig.apply(console, arguments);
+            };
+          }
+        });
+        window.addEventListener('error', function(e) {
+          var msg = (e && (e.message || '')) || '';
+          if (
+            msg.indexOf('[vite]') !== -1 ||
+            msg.indexOf('WebSocket') !== -1 ||
+            msg.indexOf('Permission dismissed') !== -1 ||
+            msg.indexOf('Camera access') !== -1 ||
+            msg.indexOf('NotAllowedError') !== -1 ||
+            (e && e.filename && e.filename.indexOf('vite') !== -1)
+          ) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+        window.addEventListener('unhandledrejection', function(e) {
+          var reason = e && e.reason;
+          var msg = reason ? (reason.message || (typeof reason === 'object' ? (reason.stack || String(reason)) : String(reason))) : '';
+          if (
+            msg.indexOf('[vite]') !== -1 ||
+            msg.indexOf('WebSocket') !== -1 ||
+            msg.indexOf('Permission dismissed') !== -1 ||
+            msg.indexOf('Camera access') !== -1 ||
+            msg.indexOf('NotAllowedError') !== -1
+          ) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#064e3b" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Scholarship" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/pwa-192x192.png" />
+    <title>SIH26238 — Unified Scholarship Web App for Tribal Students | MoTA</title>
+    <meta name="description" content="Unified scholarship web application for Scheduled Tribe (ST) students under Ministry of Tribal Affairs (MoTA), Government of India." />
+    <meta property="og:title" content="SIH26238 — Unified Scholarship Web App for Tribal Students | MoTA" />
+    <meta property="og:description" content="Unified scholarship web application for Scheduled Tribe (ST) students under Ministry of Tribal Affairs (MoTA), Government of India." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Cabinet+Grotesk:wght@700;800;900&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-100 text-slate-900 antialiased selection:bg-amber-100 selection:text-amber-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

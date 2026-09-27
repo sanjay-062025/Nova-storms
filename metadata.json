@@ -1,0 +1,6 @@
+{
+  "name": "SIH26238 — Unified Scholarship Web App for Tribal Students",
+  "description": "Unified scholarship web application for Scheduled Tribe (ST) students under Ministry of Tribal Affairs (MoTA), Government of India.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

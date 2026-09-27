@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c22"/>
+      <stop offset="50%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#0f766e"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="512" height="512" rx="112" fill="url(#grad)"/>
+
+  <!-- Outer Decorative Ring -->
+  <circle cx="256" cy="256" r="216" fill="none" stroke="url(#gold)" stroke-width="6" stroke-dasharray="16 10" opacity="0.6"/>
+  <circle cx="256" cy="256" r="200" fill="none" stroke="url(#gold)" stroke-width="2" opacity="0.4"/>
+
+  <!-- Central Shield -->
+  <path d="M 256 96 C 330 96 380 120 380 170 C 380 290 290 370 256 416 C 222 370 132 290 132 170 C 132 120 182 96 256 96 Z" 
+        fill="url(#shield)" stroke="url(#gold)" stroke-width="8"/>
+
+  <!-- Graduation Mortarboard & Cap -->
+  <path d="M 256 160 L 336 195 L 256 230 L 176 195 Z" fill="url(#gold)"/>
+  <path d="M 200 215 L 200 250 C 200 270 312 270 312 250 L 312 215" fill="none" stroke="url(#gold)" stroke-width="7" stroke-linecap="round"/>
+  
+  <!-- Tassel -->
+  <path d="M 324 200 L 338 245 L 344 245" fill="none" stroke="#fef08a" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="344" cy="250" r="5" fill="#fef08a"/>
+
+  <!-- Radiant Torch / Open Book of Knowledge -->
+  <!-- Open Book -->
+  <path d="M 256 300 C 275 285 305 285 330 295 L 330 345 C 305 335 275 335 256 350 C 237 335 207 335 182 345 L 182 295 C 207 285 237 285 256 300 Z"
+        fill="#ffffff" opacity="0.95"/>
+  <path d="M 256 300 L 256 350" stroke="#064e3b" stroke-width="4"/>
+
+  <!-- Tribal Emblem Three Rays -->
+  <path d="M 256 240 L 256 265" stroke="url(#gold)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 235 245 L 245 265" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 277 245 L 267 265" stroke="url(#gold)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Ashoka Wheel Spokes / Star -->
+  <circle cx="256" cy="385" r="10" fill="url(#gold)"/>
+</svg>
